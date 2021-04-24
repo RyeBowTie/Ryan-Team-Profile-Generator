@@ -1,0 +1,27 @@
+{
+  "name": "ryan-team-profile-generator",
+  "version": "1.0.0",
+  "description": "Team Profile Generator",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyeBowTie/Ryan-Team-Profile-Generator.git"
+  },
+  "author": "Ryan O'Donohue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyeBowTie/Ryan-Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/RyeBowTie/Ryan-Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "jest": "^26.6.3"
+  }
+}
