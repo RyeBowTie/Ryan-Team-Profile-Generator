@@ -1,12 +1,8 @@
 const inquirer = require("inquirer")
 const fs = require('fs');
-// const Employee = require("./lib/employee");
-// const Engineer = require("./lib/engineer");
-// const Intern = require("./lib/intern");
-// const Manager = require("./lib/manager")
 
-const website1 = require('./lib/HTML1');
-const website2 = require('./lib/HTML2')
+const website1 = require('./src/HTML1');
+const website2 = require('./src/HTML2')
 
 const templateArray = [];
 
