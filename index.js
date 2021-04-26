@@ -1,23 +1,21 @@
-const inquirer = require("inquirer")
+const inquirer = require("inquirer");
 const fs = require('fs');
 
 const website1 = require('./src/HTML1');
-const website2 = require('./src/HTML2')
+const website2 = require('./src/HTML2');
 
 const templateArray = [];
 
 function addToTemplate () {
-    const websiteArray = [website1, templateArray.join(''), website2]
-    writeFile(websiteArray.join(''))
-    
+    const websiteArray = [website1, templateArray.join(''), website2];
+    writeFile(websiteArray.join('')); 
 };
 
 function writeFile(website) {
-    
     fs.writeFile('./dist/index.html', website, (err) =>
     err ? console.error(err) : console.log('Success!') 
     );
-}
+};
 
 function managerInfo () {
     inquirer.prompt([
@@ -171,4 +169,5 @@ function nextTeamMember (response) {
             break;
     };
 }
+
 managerInfo ()
