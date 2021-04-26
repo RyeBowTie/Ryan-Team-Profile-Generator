@@ -1,14 +1,27 @@
 const inquirer = require("inquirer")
-const Employee = require("./lib/employee");
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
-const Manager = require("./lib/manager")
+const fs = require('fs');
+// const Employee = require("./lib/employee");
+// const Engineer = require("./lib/engineer");
+// const Intern = require("./lib/intern");
+// const Manager = require("./lib/manager")
 
-const objectArray = [];
+const website1 = require('./lib/HTML1');
+const website2 = require('./lib/HTML2')
+
+const templateArray = [];
 
 function addToTemplate () {
-    console.log(objectArray.join(','))
+    const websiteArray = [website1, templateArray.join(''), website2]
+    writeFile(websiteArray.join(''))
+    
 };
+
+function writeFile(website) {
+    
+    fs.writeFile('./dist/index.html', website, (err) =>
+    err ? console.error(err) : console.log('Success!') 
+    );
+}
 
 function managerInfo () {
     inquirer.prompt([
@@ -39,21 +52,19 @@ function managerInfo () {
         },
     ])
     .then((response) => {
-        const manage = new Manager(response.name, response.id, response.email, response.office);
-        
         const template = 
-        `<div class="col-sm-12  col-m-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                        <h5 class="card-title">Manager</h5>
-                        <h5 class="name">${response.name}</h5>
-                        <h5 class="employeeID">${response.id}</h5>
-                        <h5 class="email">${response.email}</h5>
-                        <h5 class="office">${response.office}</h5>
-                    </div>
-                </div>
-            </div>`
-        objectArray.push(template);
+        `<div class="card">
+            <div class="card-body">
+                <h4 class="card-title">MANAGER</h4>
+                <h5 class="name">${response.name}</h5>
+                <h5 class="employeeID">ID: ${response.id}</h5>
+                <address>
+                    <a href="mailto:${response.email}">${response.email}</a>
+                </address>
+                <h5 class="office">Office: ${response.office}</h5>
+            </div>
+        </div>`
+        templateArray.push(template);
         nextTeamMember(response.add);
     }); 
 
@@ -88,20 +99,19 @@ function engineerInfo() {
         },
     ])
     .then((response) => {
-        const engineer = new Engineer(response.name, response.id, response.email, response.github);
         const template = 
-        `<div class="col-sm-12  col-m-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                        <h5 class="card-title">Manager</h5>
-                        <h5 class="name">${response.name}</h5>
-                        <h5 class="employeeID">${response.id}</h5>
-                        <h5 class="email">${response.email}</h5>
-                        <h5 class="office">${response.office}</h5>
-                    </div>
-                </div>
-            </div>`
-        objectArray.push(template);
+        `<div class="card">
+            <div class="card-body">
+                <h4 class="card-title">ENGINEER</h4>
+                <h5 class="name">${response.name}</h5>
+                <h5 class="employeeID">ID: ${response.id}</h5>
+                <address>
+                    <a href="mailto:${response.email}">${response.email}</a>
+                </address>
+                <a class="github" target="_blank" href="https://github.com/${response.github}">${response.github}</a>
+            </div>
+        </div>`
+        templateArray.push(template);
         nextTeamMember(response.add);
     }); 
 };
@@ -135,27 +145,24 @@ function internInfo () {
         },
     ])
     .then((response) => {
-        const intern = new Intern(response.name, response.id, response.email, response.school);
-        
         const template = 
-        `<div class="col-sm-12  col-m-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                        <h5 class="card-title">Manager</h5>
-                        <h5 class="name">${response.name}</h5>
-                        <h5 class="employeeID">${response.id}</h5>
-                        <h5 class="email">${response.email}</h5>
-                        <h5 class="office">${response.office}</h5>
-                    </div>
-                </div>
-            </div>`
-            objectArray.push(template);
+        `<div class="card">
+            <div class="card-body">
+                <h4 class="card-title">INTERN</h4>
+                <h5 class="name">${response.name}</h5>
+                <h5 class="employeeID">ID: ${response.id}</h5>
+                <address>
+                    <a class="email" href="mailto:${response.email}">${response.email}</a>
+                </address>
+                <h5 class="school">${response.school}</h5>
+            </div>
+        </div>`
+        templateArray.push(template);
         nextTeamMember(response.add);
     }); 
 };
 
 function nextTeamMember (response) {
-    
     switch (response) {
         case 'Add Engineer':
             engineerInfo();
