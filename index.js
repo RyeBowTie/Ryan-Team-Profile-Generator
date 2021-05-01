@@ -3,6 +3,9 @@ const fs = require('fs');
 
 const website1 = require('./src/HTML1');
 const website2 = require('./src/HTML2');
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 
 const templateArray = [];
 
@@ -46,16 +49,17 @@ function managerInfo () {
         },
     ])
     .then((response) => {
+        const manager = new Manager(response.name, response.id, response.email, response.office)
         const template = 
         `<div class="card">
             <div class="card-body">
                 <h4 class="card-title">MANAGER</h4>
-                <h5 class="name">${response.name}</h5>
-                <h5 class="employeeID">ID: ${response.id}</h5>
+                <h5 class="name">${manager.name}</h5>
+                <h5 class="employeeID">ID: ${manager.id}</h5>
                 <address>
-                    <a href="mailto:${response.email}">${response.email}</a>
+                    <a href="mailto:${manager.email}">${manager.email}</a>
                 </address>
-                <h5 class="office">Office: ${response.office}</h5>
+                <h5 class="office">Office: ${manager.office}</h5>
             </div>
         </div>`
         templateArray.push(template);
@@ -93,16 +97,17 @@ function engineerInfo() {
         },
     ])
     .then((response) => {
+        const engineer = new Engineer(response.name, response.id, response.email, response.github)
         const template = 
         `<div class="card">
             <div class="card-body">
                 <h4 class="card-title">ENGINEER</h4>
-                <h5 class="name">${response.name}</h5>
-                <h5 class="employeeID">ID: ${response.id}</h5>
+                <h5 class="name">${engineer.name}</h5>
+                <h5 class="employeeID">ID: ${engineer.id}</h5>
                 <address>
-                    <a href="mailto:${response.email}">${response.email}</a>
+                    <a href="mailto:${engineer.email}">${engineer.email}</a>
                 </address>
-                <a class="github" target="_blank" href="https://github.com/${response.github}">${response.github}</a>
+                <a class="github" target="_blank" href="https://github.com/${engineer.github}">${engineer.github}</a>
             </div>
         </div>`
         templateArray.push(template);
@@ -139,16 +144,17 @@ function internInfo () {
         },
     ])
     .then((response) => {
+        const intern = new Intern(response.name, response.id, response.email, response.school)
         const template = 
         `<div class="card">
             <div class="card-body">
                 <h4 class="card-title">INTERN</h4>
-                <h5 class="name">${response.name}</h5>
-                <h5 class="employeeID">ID: ${response.id}</h5>
+                <h5 class="name">${intern.name}</h5>
+                <h5 class="employeeID">ID: ${intern.id}</h5>
                 <address>
-                    <a class="email" href="mailto:${response.email}">${response.email}</a>
+                    <a class="email" href="mailto:${intern.email}">${intern.email}</a>
                 </address>
-                <h5 class="school">${response.school}</h5>
+                <h5 class="school">${intern.school}</h5>
             </div>
         </div>`
         templateArray.push(template);
